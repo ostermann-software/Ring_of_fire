@@ -1,1 +1,9 @@
-<p>game works!</p>
+<div class="field">
+
+    <div class="card-stack">
+        @for(i of [1, 2, 3, 4, 5]; track i) {
+            <img [ngStyle]="{'right': i + 'px', 'bottom': i + 'px'}" src="./../../assets/img/cards/card_cover.png" alt="">
+        }
+    </div>
+
+</div>
