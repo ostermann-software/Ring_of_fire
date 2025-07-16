@@ -1,7 +1,9 @@
 export class Gamevar {
-    public players: string[] = [];
+    public players: string[] = ['Anton', 'Berta', 'Chris'];
     public stack: string[] = [];
     public playedCards: string[] = [];
+    public rotate: number[] = [];
+    public pos: number[] = [];
     public currentPlayer: number = 0;
 
     constructor() {

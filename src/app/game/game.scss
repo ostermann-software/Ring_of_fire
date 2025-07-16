@@ -34,9 +34,8 @@
 }
 
 .pic-card {
-    // transition: all 100ms ease-in-out;
     animation: pic-card-animation 1.5s ease-in-out;
-    transform: scale(1.0) translateX(200px) translateY(-250px) rotate(30deg);
+    transform: scale(1.0) translateX(var(--pos, 200px)) translateY(-250px) rotate(var(--rotate, 0deg));
 }
 
 @keyframes pic-card-animation {
@@ -45,19 +44,23 @@
     }
 
     40% {
-        transform: scale(1.4);
+        transform: scale(2.0);
     }
 
     50% {
-        transform: scale(1.4);
+        transform: scale(2.0);
     }
 
     100% {
-        transform: scale(1.0) translateX(200px) translateY(-250px) rotate(30deg);
+        transform: scale(1.0) translateX(var(--pos, 200px)) translateY(-250px) rotate(var(--rotate, 0deg));
     }
 }
 
 .played-card {
-    // animation: pic-card-animation 1.5s ease-in-out;
-    transform: scale(1.0) translateX(200px) translateY(-250px) rotate(30deg);
+    transform: scale(1.0) translateX(var(--pos, 200px)) translateY(-250px) rotate(var(--rotate, 0deg));
+}
+
+.player-pos {
+    position: absolute;
+    right: 0;
 }
