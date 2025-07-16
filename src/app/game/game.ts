@@ -13,6 +13,7 @@ export class Game {
 
   gamevar!: Gamevar;
   pickCardAnimation = false;
+  currentCard: string = '';
 
 
   ngOnInit(): void {
@@ -21,13 +22,20 @@ export class Game {
 
   newGame() {
     this.gamevar = new Gamevar();
-    console.log(this.gamevar);
+    // console.log(this.gamevar);
   }
 
   takeCard() {
-    console.log('Karte!');
-    this.pickCardAnimation = true;
-  }
+    if (!this.pickCardAnimation) {
+      this.currentCard = this.gamevar.stack.pop() || '';
+      console.log('Karte: ', this.currentCard, 'Stack:', this.gamevar.stack);
+      this.pickCardAnimation = true;
 
+      setTimeout(() => {
+        this.pickCardAnimation = false;
+      }, 3000);
+    }
+
+  }
 
 }

@@ -10,8 +10,7 @@
                 alt="">
             @if (pickCardAnimation) {
             <img (click)="takeCard()" class="top-card pic-card"
-                [ngStyle]="{'right.px': (i-3) * 1, 'bottom.px': (i-3) * 2}" src="/assets/img/cards/spade_1.png"
-                alt="">
+                [ngStyle]="{'right.px': (i-3) * 1, 'bottom.px': (i-3) * 2}" src="/assets/img/cards/{{ this.currentCard }}.png" alt="">
             }
             }
             }
