@@ -24,9 +24,6 @@ export class Game {
     console.log(this.gamevar);
   }
 
-
-
-
   takeCard() {
     console.log('Karte!');
     this.pickCardAnimation = true;
