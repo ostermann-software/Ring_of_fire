@@ -29,29 +29,35 @@
 
     &:hover {
         filter: brightness(1.2);
+        transform: scale(1.04);
     }
 }
 
 .pic-card {
     // transition: all 100ms ease-in-out;
     animation: pic-card-animation 1.5s ease-in-out;
-    transform: scale(1.2) translateX(200px) translateY(-250px) rotate(30deg);
+    transform: scale(1.0) translateX(200px) translateY(-250px) rotate(30deg);
 }
 
 @keyframes pic-card-animation {
     0% {
-        transform: scale(1);
+        transform: scale(1.04);
     }
 
     40% {
-        transform: scale(1.6);
+        transform: scale(1.4);
     }
 
     50% {
-        transform: scale(1.6);
+        transform: scale(1.4);
     }
 
     100% {
-        transform: scale(1.2) translateX(200px) translateY(-250px) rotate(30deg);
+        transform: scale(1.0) translateX(200px) translateY(-250px) rotate(30deg);
     }
+}
+
+.played-card {
+    // animation: pic-card-animation 1.5s ease-in-out;
+    transform: scale(1.0) translateX(200px) translateY(-250px) rotate(30deg);
 }

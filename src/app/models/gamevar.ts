@@ -6,10 +6,10 @@ export class Gamevar {
 
     constructor() {
         for (let i = 1; i < 14; i++) {
-            this.stack.push('clubs_' + i);
-            this.stack.push('spade_' + i);
-            this.stack.push('hearts_' + i);
-            this.stack.push('diamonds_' + i);
+            this.stack.push('kreuz_' + i);
+            this.stack.push('pik_' + i);
+            this.stack.push('herz_' + i);
+            this.stack.push('karo_' + i);
         }
         shuffle(this.stack);
     }

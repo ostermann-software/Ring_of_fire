@@ -22,18 +22,18 @@ export class Game {
 
   newGame() {
     this.gamevar = new Gamevar();
-    // console.log(this.gamevar);
   }
 
   takeCard() {
-    if (!this.pickCardAnimation) {
+    if (!this.pickCardAnimation && this.gamevar.stack.length > 0) {
       this.currentCard = this.gamevar.stack.pop() || '';
-      console.log('Karte: ', this.currentCard, 'Stack:', this.gamevar.stack);
+      console.log('Karte: ', this.currentCard, this.gamevar);
       this.pickCardAnimation = true;
 
       setTimeout(() => {
         this.pickCardAnimation = false;
-      }, 3000);
+        this.gamevar.playedCards.push(this.currentCard);
+      }, 1500);
     }
 
   }
