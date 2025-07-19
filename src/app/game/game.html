@@ -1,5 +1,5 @@
 @for (j of gamevar.players; let i = $index; track j) {
-<app-player [ngStyle]="{'top.px': i * 100 + 100}" [name]="j" class="player-pos"></app-player>
+<app-player [ngStyle]="{'top.px': i * 110 + 40}" [name]="j" class="player-pos"></app-player>
 }
 
 
@@ -31,3 +31,9 @@
     </div>
 
 </div>
+
+
+
+<button matFab (click)="openDialog()" class="btn-add">
+    <mat-icon>add</mat-icon>
+</button>

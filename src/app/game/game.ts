@@ -2,10 +2,26 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Gamevar } from "./../models/gamevar";
 import { Player } from '../player/player';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+
 
 @Component({
   selector: 'app-game',
-  imports: [CommonModule, Player],
+  imports: [CommonModule, Player, MatButtonModule, MatIconModule],
   templateUrl: './game.html',
   styleUrl: './game.scss'
 })
@@ -47,6 +63,19 @@ export class Game {
     }
   }
 
-  
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogAddPlayer, {
+      data: { name: this.name(), animal: this.animal() },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result !== undefined) {
+        this.animal.set(result);
+      }
+    });
+  }
+
 
 }
