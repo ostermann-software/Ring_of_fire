@@ -1,37 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Gamevar } from "./../models/gamevar";
 import { Player } from '../player/player';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDialogModule } from '@angular/material/dialog';
-import { FormsModule } from '@angular/forms';
-import {
-  MAT_DIALOG_DATA,
-  MatDialog,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle,
-} from '@angular/material/dialog';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-
+import { MatDialog } from '@angular/material/dialog';
+import { DialogAddPlayer } from '../dialog-add-player/dialog-add-player';
 
 @Component({
   selector: 'app-game',
+  standalone: true,
   imports: [CommonModule, Player, MatButtonModule, MatIconModule],
   templateUrl: './game.html',
   styleUrl: './game.scss'
 })
-
 export class Game {
+
+  dialog = inject(MatDialog);
 
   gamevar!: Gamevar;
   pickCardAnimation = false;
   currentCard: string = '';
 
+  name: string = 'Anna';
+  animal: string = 'Cat';
 
   ngOnInit(): void {
     this.newGame();
@@ -63,19 +55,17 @@ export class Game {
     }
   }
 
-
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayer, {
-      data: { name: this.name(), animal: this.animal() },
+      data: { name: this.name, animal: this.animal },
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       if (result !== undefined) {
-        this.animal.set(result);
+        this.animal = result;
       }
     });
   }
-
 
 }
