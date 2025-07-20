@@ -35,6 +35,9 @@ export class GameInfo implements OnChanges {
       this.titel = this.cardAction[cardNumber].title;
       this.description = this.cardAction[cardNumber].description;
       console.log('Titel:', this.titel, this.description);
+    } else {
+      this.titel = 'Spieler 1:';
+      this.description = 'Ziehe eine Karte';
     }
 
   }

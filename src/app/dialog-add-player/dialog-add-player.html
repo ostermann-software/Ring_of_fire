@@ -7,6 +7,6 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="data.name">Ok</button>
+  <button mat-button [disabled]="data.name.length == 0" [mat-dialog-close]="data.name">Ok</button>
 </div>
 
