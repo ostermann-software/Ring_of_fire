@@ -1,5 +1,5 @@
 export class Gamevar {
-    public players: string[] = ['Anton', 'Berta', 'Chris'];
+    public players: string[] = ['Anton', 'Josef', 'Chris'];
     public stack: string[] = [];
     public playedCards: string[] = [];
     public rotate: number[] = [];

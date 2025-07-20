@@ -6,24 +6,22 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayer } from '../dialog-add-player/dialog-add-player';
+import { GameInfo } from '../game-info/game-info';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule, Player, MatButtonModule, MatIconModule],
+  imports: [CommonModule, Player, MatButtonModule, MatIconModule, GameInfo],
   templateUrl: './game.html',
   styleUrl: './game.scss'
 })
 export class Game {
 
   dialog = inject(MatDialog);
-
   gamevar!: Gamevar;
   pickCardAnimation = false;
   currentCard: string = '';
-
-  name: string = 'Anna';
-  animal: string = 'Cat';
+  name: string = '';
 
   ngOnInit(): void {
     this.newGame();
@@ -40,10 +38,13 @@ export class Game {
       this.pickCardAnimation = true;
       this.gamevar.rotate.push(Math.random() * 360);
       this.gamevar.pos.push(Math.random() * 100);
-
       setTimeout(() => {
         this.pickCardAnimation = false;
         this.gamevar.playedCards.push(this.currentCard);
+        this.gamevar.currentPlayer += 1;
+        if (this.gamevar.currentPlayer >= this.gamevar.players.length) {
+          this.gamevar.currentPlayer = 0;
+        }
       }, 1500);
     }
   }
@@ -57,13 +58,11 @@ export class Game {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayer, {
-      data: { name: this.name, animal: this.animal },
+      data: { name: this.name },
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      if (result !== undefined) {
-        this.animal = result;
+    dialogRef.afterClosed().subscribe((result: string) => {
+      if (result) {
+        this.gamevar.players.push(result);
       }
     });
   }

@@ -1,12 +1,12 @@
-<h1 mat-dialog-title>Hi {{ data.name }}</h1>
+<h1 mat-dialog-title>Neuer Spieler</h1>
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
+  <!-- <p>Name:</p> -->
   <mat-form-field>
-    <input matInput [(ngModel)]="data.animal" />
+    <input matInput [(ngModel)]="data.name" placeholder="Name"/>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="data.animal">Ok</button>
+  <button mat-button [mat-dialog-close]="data.name">Ok</button>
 </div>
 
