@@ -9,20 +9,60 @@ import { MatCardModule } from '@angular/material/card';
 })
 export class GameInfo implements OnChanges {
   cardAction = [
-    { title: 'Waterfall', description: 'Everyone has to start drinking at the same time. As soon as player 1 stops drinking, player 2 may stop drinking. Player 3 may stop as soon as player 2 stops drinking, and so on.' },
-    { title: 'You', description: 'You decide who drinks' },
-    { title: 'Me', description: 'Congrats! Drink a shot!' },
-    { title: 'Category', description: 'Come up with a category (e.g. Colors). Each player must enumerate one item from the category.' },
-    { title: 'Bust a jive', description: 'Player 1 makes a dance move. Player 2 repeats the dance move and adds a second one. ' },
-    { title: 'Chicks', description: 'All girls drink.' },
-    { title: 'Heaven', description: 'Put your hands up! The last player drinks!' },
-    { title: 'Mate', description: 'Pick a mate. Your mate must always drink when you drink and the other way around.' },
-    { title: 'Thumbmaster', description: '' },
-    { title: 'Men', description: 'All men drink.' },
-    { title: 'Quizmaster', description: '' },
-    { title: 'Never have i ever...', description: 'Say something you nnever did. Everyone who did it has to drink.' },
-    { title: 'Rule', description: 'Make a rule. Everyone needs to drink when he breaks the rule.' },
+    {
+      title: 'Waterfall',
+      description: 'Alle müssen gleichzeitig anfangen zu trinken. Sobald Spieler 1 aufhört, darf Spieler 2 aufhören. Spieler 3 darf erst aufhören, wenn Spieler 2 aufhört – und so weiter.'
+    },
+    {
+      title: 'You',
+      description: 'Du entscheidest, wer trinken muss.'
+    },
+    {
+      title: 'Me',
+      description: 'Glückwunsch! Du musst einen Shot trinken!'
+    },
+    {
+      title: 'Category',
+      description: 'Denke dir eine Kategorie aus (z. B. Farben). Jeder Spieler muss ein passendes Beispiel nennen.'
+    },
+    {
+      title: 'Bust a jive',
+      description: 'Spieler 1 macht eine Tanzbewegung. Spieler 2 wiederholt sie und fügt eine neue hinzu. Und so weiter.'
+    },
+    {
+      title: 'Chicks',
+      description: 'Alle Frauen trinken.'
+    },
+    {
+      title: 'Heaven',
+      description: 'Hände hoch! Wer als Letzter reagiert, muss trinken!'
+    },
+    {
+      title: 'Mate',
+      description: 'Wähle einen Trink-Partner. Immer wenn einer von euch trinkt, muss der andere mittrinken.'
+    },
+    {
+      title: 'Thumbmaster',
+      description: 'Du bist der Daumenmeister. Irgendwann legst du unauffällig deinen Daumen auf den Tisch. Wer es zuletzt bemerkt und nachmacht, trinkt.'
+    },
+    {
+      title: 'Men',
+      description: 'Alle Männer trinken.'
+    },
+    {
+      title: 'Quizmaster',
+      description: 'Du bist der Quizmaster. Jeder, der auf deine Fragen antwortet, muss trinken – bis der nächste Quizmaster kommt.'
+    },
+    {
+      title: 'Never have I ever...',
+      description: 'Sage etwas, das du noch nie gemacht hast. Alle, die es schon gemacht haben, müssen trinken.'
+    },
+    {
+      title: 'Rule',
+      description: 'Erfinde eine neue Regel. Wer sie verletzt, muss trinken.'
+    }
   ];
+
 
   titel: string = '';
   description: string = '';

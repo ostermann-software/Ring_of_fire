@@ -12,20 +12,20 @@
     <div class="card-stack">
         @for(i of [0, 1, 2, 3, 4, 5, 6]; track i) {
         @if (i < 6) { <img [ngStyle]="{'right.px': (i-3) * 1, 'bottom.px': (i-3) * 2}"
-            src="/assets/img/cards/card_cover.png" alt="">
+            src="assets/img/cards/card_cover.png" alt="">
             }
             @else { <img (click)="takeCard()" class="top-card"
-                [ngStyle]="{'right.px': (i-3) * 1, 'bottom.px': (i-3) * 2}" src="/assets/img/cards/card_cover.png"
+                [ngStyle]="{'right.px': (i-3) * 1, 'bottom.px': (i-3) * 2}" src="assets/img/cards/card_cover.png"
                 alt="">
             @for(j of gamevar.playedCards; let i = $index; track j) {
             <img class="played-card" [style.--rotate]="gamevar.rotate[i] + 'deg'" [style.--pos]="gamevar.pos[i] + 'px'"
-                src="/assets/img/cards/{{ j }}.png" alt="">
+                src="assets/img/cards/{{ j }}.png" alt="">
             }
             @if (pickCardAnimation) {
             <img (click)="takeCard()" class="pic-card"
                 [style.--rotate]="gamevar.rotate[gamevar.rotate.length - 1] + 'deg'"
                 [style.--pos]="gamevar.pos[gamevar.pos.length - 1] + 'px'"
-                src="/assets/img/cards/{{ this.currentCard }}.png" alt="">
+                src="assets/img/cards/{{ this.currentCard }}.png" alt="">
             }
             }
             }
