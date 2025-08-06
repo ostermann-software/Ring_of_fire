@@ -22,6 +22,8 @@ export class Gamevar {
             stack: this.stack,
             playedCards: this.playedCards,
             currentPlayer: this.currentPlayer,
+            rotate: this.rotate,
+            pos: this.pos,
         }
     }
 }

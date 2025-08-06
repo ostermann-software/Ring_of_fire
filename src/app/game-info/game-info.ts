@@ -69,12 +69,12 @@ export class GameInfo implements OnChanges {
   @Input() card!: string;
 
   ngOnChanges(): void {
-    console.log('Current card:', this.card);
+    // console.log('Current card:', this.card);
     let cardNumber = +this.card.split('_')[1] - 1;
     if (cardNumber >= 0) {
       this.titel = this.cardAction[cardNumber].title;
       this.description = this.cardAction[cardNumber].description;
-      console.log('Titel:', this.titel, this.description);
+      // console.log('Titel:', this.titel, this.description);
     } else {
       this.titel = 'Spieler 1:';
       this.description = 'Ziehe eine Karte';

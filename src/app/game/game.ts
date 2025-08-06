@@ -51,6 +51,8 @@ export class Game {
             this.gamevar.stack = gameFirebase.stack;
             this.gamevar.players = gameFirebase.players;
             this.gamevar.playedCards = gameFirebase.playedCards;
+            this.gamevar.rotate = gameFirebase.rotate;
+            this.gamevar.pos = gameFirebase.pos;
           });
       });
   }
@@ -64,10 +66,10 @@ export class Game {
   takeCard() {
     if (!this.pickCardAnimation && this.gamevar.stack.length > 0) {
       this.currentCard = this.gamevar.stack.pop() || '';
-      console.log('Karte: ', this.currentCard, this.gamevar);
       this.pickCardAnimation = true;
       this.gamevar.rotate.push(Math.random() * 360);
       this.gamevar.pos.push(Math.random() * 100);
+      this.saveGame();
       setTimeout(() => {
         this.pickCardAnimation = false;
         this.gamevar.playedCards.push(this.currentCard);
@@ -75,13 +77,13 @@ export class Game {
         if (this.gamevar.currentPlayer >= this.gamevar.players.length) {
           this.gamevar.currentPlayer = 0;
         }
+        this.saveGame();
       }, 1500);
     }
   }
 
 
   sort() {
-    console.log('Ich sortiere!');
     for (let i = 0; i < this.gamevar.pos.length; i++) {
       this.gamevar.pos[i] = 0;
     }
@@ -95,6 +97,7 @@ export class Game {
     dialogRef.afterClosed().subscribe((result: string) => {
       if (result) {
         this.gamevar.players.push(result);
+        this.saveGame();
       }
     });
   }
