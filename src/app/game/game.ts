@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayer } from '../dialog-add-player/dialog-add-player';
 import { GameInfo } from '../game-info/game-info';
-import { Firestore, collection, collectionData, addDoc, getDocs, doc, docData } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, addDoc, getDocs, doc, docData, updateDoc } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 
 
@@ -29,6 +29,7 @@ export class Game {
   name: string = '';
   firestore = inject(Firestore);
   gamesCollection = collection(this.firestore, 'games');
+  gameId: string = '';
 
 
   constructor(private route: ActivatedRoute) { }
@@ -36,24 +37,27 @@ export class Game {
 
   ngOnInit(): void {
     this.newGame();
-    this.route.params.subscribe((params) => {
-      const gameId = params['id'];
-      console.log('ID: ', gameId);
-      const gameDocRef = doc(this.firestore, 'games', gameId);
-      docData(gameDocRef).subscribe((gameFirebase: any) => {
-        console.log('Game update', gameFirebase);
-        this.gamevar.currentPlayer = gameFirebase.currentPlayer;
-        this.gamevar.stack = gameFirebase.stack;
-        this.gamevar.players = gameFirebase.players;
-        this.gamevar.playedCards = gameFirebase.playedCards;
+    this
+      .route
+      .params
+      .subscribe((params) => {
+        this.gameId = params['id'];
+        console.log('ID: ', this.gameId);
+        const gameDocRef = doc(this.firestore, 'games', this.gameId);
+        docData(gameDocRef)
+          .subscribe((gameFirebase: any) => {
+            console.log('Game update', gameFirebase);
+            this.gamevar.currentPlayer = gameFirebase.currentPlayer;
+            this.gamevar.stack = gameFirebase.stack;
+            this.gamevar.players = gameFirebase.players;
+            this.gamevar.playedCards = gameFirebase.playedCards;
+          });
       });
-    });
   }
 
 
   newGame() {
     this.gamevar = new Gamevar();
-    // addDoc(this.gamesCollection, this.gamevar.toJson());
   }
 
 
@@ -94,5 +98,12 @@ export class Game {
       }
     });
   }
+
+
+  saveGame() {
+    const gameDocRef = doc(this.firestore, 'games', this.gameId);
+    updateDoc(gameDocRef, this.gamevar.toJson());
+  }
+
 
 }
