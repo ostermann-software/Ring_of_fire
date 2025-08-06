@@ -7,6 +7,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayer } from '../dialog-add-player/dialog-add-player';
 import { GameInfo } from '../game-info/game-info';
+import { Firestore, collection, collectionData , addDoc, getDocs } from '@angular/fire/firestore';
+
 
 @Component({
   selector: 'app-game',
@@ -22,16 +24,23 @@ export class Game {
   pickCardAnimation = false;
   currentCard: string = '';
   name: string = '';
+  firestore = inject(Firestore);
+  gamesCollection = collection(this.firestore, 'games');
 
   ngOnInit(): void {
-    this.newGame();
+    this.newGame();    
+    collectionData(this.gamesCollection).subscribe((test) => {
+      console.log('Game update', test);
+    })
   }
 
   newGame() {
     this.gamevar = new Gamevar();
+    addDoc(this.gamesCollection, this.gamevar.toJson());
   }
 
   takeCard() {
+    // this.loadAllGames();
     if (!this.pickCardAnimation && this.gamevar.stack.length > 0) {
       this.currentCard = this.gamevar.stack.pop() || '';
       console.log('Karte: ', this.currentCard, this.gamevar);
@@ -48,6 +57,16 @@ export class Game {
       }, 1500);
     }
   }
+
+
+// async loadAllGames() {
+//   const gamesCollection = collection(this.firestore, 'games');
+//   const querySnapshot = await getDocs(gamesCollection);
+//   querySnapshot.forEach((doc) => {
+//     console.log(`Dokument-ID: ${doc.id}`, doc.data());
+//   });
+// }
+
 
   sort() {
     console.log('Ich sortiere!');
