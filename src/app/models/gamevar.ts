@@ -5,6 +5,8 @@ export class Gamevar {
     public rotate: number[] = [];
     public pos: number[] = [];
     public currentPlayer: number = 0;
+    public pickCardAnimation = false;
+    public currentCard: string = '';
 
     constructor() {
         for (let i = 1; i < 14; i++) {
@@ -24,18 +26,20 @@ export class Gamevar {
             currentPlayer: this.currentPlayer,
             rotate: this.rotate,
             pos: this.pos,
+            pickCardAnimation: this.pickCardAnimation,
+            currentCard: this.currentCard,
         }
     }
 }
 
 
 export function shuffle<T>(array: T[]): T[] {
-    let currentIndex = array.length,  randomIndex;
+    let currentIndex = array.length, randomIndex;
     while (currentIndex != 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
     }
     return array;
 };

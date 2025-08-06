@@ -24,8 +24,6 @@ export class Game {
 
   dialog = inject(MatDialog);
   gamevar!: Gamevar;
-  pickCardAnimation = false;
-  currentCard: string = '';
   name: string = '';
   firestore = inject(Firestore);
   gamesCollection = collection(this.firestore, 'games');
@@ -53,6 +51,8 @@ export class Game {
             this.gamevar.playedCards = gameFirebase.playedCards;
             this.gamevar.rotate = gameFirebase.rotate;
             this.gamevar.pos = gameFirebase.pos;
+            this.gamevar.pickCardAnimation = gameFirebase.pickCardAnimation;
+            this.gamevar.currentCard = gameFirebase.currentCard;
           });
       });
   }
@@ -64,15 +64,15 @@ export class Game {
 
 
   takeCard() {
-    if (!this.pickCardAnimation && this.gamevar.stack.length > 0) {
-      this.currentCard = this.gamevar.stack.pop() || '';
-      this.pickCardAnimation = true;
+    if (!this.gamevar.pickCardAnimation && this.gamevar.stack.length > 0) {
+      this.gamevar.currentCard = this.gamevar.stack.pop() || '';
+      this.gamevar.pickCardAnimation = true;
       this.gamevar.rotate.push(Math.random() * 360);
       this.gamevar.pos.push(Math.random() * 100);
       this.saveGame();
       setTimeout(() => {
-        this.pickCardAnimation = false;
-        this.gamevar.playedCards.push(this.currentCard);
+        this.gamevar.pickCardAnimation = false;
+        this.gamevar.playedCards.push(this.gamevar.currentCard);
         this.gamevar.currentPlayer += 1;
         if (this.gamevar.currentPlayer >= this.gamevar.players.length) {
           this.gamevar.currentPlayer = 0;

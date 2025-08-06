@@ -21,11 +21,11 @@
             <img class="played-card" [style.--rotate]="gamevar.rotate[i] + 'deg'" [style.--pos]="gamevar.pos[i] + 'px'"
                 src="assets/img/cards/{{ j }}.png" alt="">
             }
-            @if (pickCardAnimation) {
+            @if (gamevar.pickCardAnimation) {
             <img (click)="takeCard()" class="pic-card"
                 [style.--rotate]="gamevar.rotate[gamevar.rotate.length - 1] + 'deg'"
                 [style.--pos]="gamevar.pos[gamevar.pos.length - 1] + 'px'"
-                src="assets/img/cards/{{ this.currentCard }}.png" alt="">
+                src="assets/img/cards/{{ gamevar.currentCard }}.png" alt="">
             }
             }
             }
@@ -33,7 +33,7 @@
 </div>
 
 
-<app-game-info [card]="currentCard" class="pin-bottom"></app-game-info>
+<app-game-info [card]="gamevar.currentCard" class="pin-bottom"></app-game-info>
 
 
 <button matFab (click)="openDialog()" class="btn-add">
