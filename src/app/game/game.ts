@@ -7,7 +7,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayer } from '../dialog-add-player/dialog-add-player';
 import { GameInfo } from '../game-info/game-info';
-import { Firestore, collection, collectionData , addDoc, getDocs } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, addDoc, getDocs, doc, docData } from '@angular/fire/firestore';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -17,6 +18,8 @@ import { Firestore, collection, collectionData , addDoc, getDocs } from '@angula
   templateUrl: './game.html',
   styleUrl: './game.scss'
 })
+
+
 export class Game {
 
   dialog = inject(MatDialog);
@@ -27,20 +30,34 @@ export class Game {
   firestore = inject(Firestore);
   gamesCollection = collection(this.firestore, 'games');
 
+
+  constructor(private route: ActivatedRoute) { }
+
+
   ngOnInit(): void {
-    this.newGame();    
-    collectionData(this.gamesCollection).subscribe((test) => {
-      console.log('Game update', test);
-    })
+    this.newGame();
+    this.route.params.subscribe((params) => {
+      const gameId = params['id'];
+      console.log('ID: ', gameId);
+      const gameDocRef = doc(this.firestore, 'games', gameId);
+      docData(gameDocRef).subscribe((gameFirebase: any) => {
+        console.log('Game update', gameFirebase);
+        this.gamevar.currentPlayer = gameFirebase.currentPlayer;
+        this.gamevar.stack = gameFirebase.stack;
+        this.gamevar.players = gameFirebase.players;
+        this.gamevar.playedCards = gameFirebase.playedCards;
+      });
+    });
   }
+
 
   newGame() {
     this.gamevar = new Gamevar();
-    addDoc(this.gamesCollection, this.gamevar.toJson());
+    // addDoc(this.gamesCollection, this.gamevar.toJson());
   }
 
+
   takeCard() {
-    // this.loadAllGames();
     if (!this.pickCardAnimation && this.gamevar.stack.length > 0) {
       this.currentCard = this.gamevar.stack.pop() || '';
       console.log('Karte: ', this.currentCard, this.gamevar);
@@ -59,21 +76,13 @@ export class Game {
   }
 
 
-// async loadAllGames() {
-//   const gamesCollection = collection(this.firestore, 'games');
-//   const querySnapshot = await getDocs(gamesCollection);
-//   querySnapshot.forEach((doc) => {
-//     console.log(`Dokument-ID: ${doc.id}`, doc.data());
-//   });
-// }
-
-
   sort() {
     console.log('Ich sortiere!');
     for (let i = 0; i < this.gamevar.pos.length; i++) {
       this.gamevar.pos[i] = 0;
     }
   }
+
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayer, {
